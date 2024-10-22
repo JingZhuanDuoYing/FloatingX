@@ -1,10 +1,10 @@
 ext {
-    kotlin_version = "1.5.21"
+    kotlin_version = "2.0.21"
     minsdk_version = 21
-    targetsdk_version = 31
-    compilesdk_version = 31
+    targetsdk_version = 35
+    compilesdk_version = 35
     version_code = gitVersionCode()
-    version_name = gitVersionTag()
+    version_name = "1.0.0"
 }
 
 static def gitVersionTag() {

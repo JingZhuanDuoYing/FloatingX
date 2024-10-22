@@ -47,7 +47,7 @@ class SimpleRvActivity : AppCompatActivity() {
                                         event: MotionEvent,
                                         control: IFxInternalHelper?
                                     ): Boolean {
-                                        val isHeader = control?.checkPointerDownTouch(R.id.text, event)
+                                        val isHeader = control?.checkPointerDownTouch(android.R.id.text1, event)
                                         return isHeader ?: true
                                     }
                                 })
@@ -91,7 +91,7 @@ class SimpleRvActivity : AppCompatActivity() {
                 )
                 orientation = LinearLayout.VERTICAL
                 addTextView {
-                    id = R.id.text
+                    id = android.R.id.text1
                     text = "我是Header"
                     layoutParams = ViewGroup.LayoutParams(
                         500,

@@ -1,10 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
 }
 if (!isPublish) apply from: "../gradle/dev_compose.gradle"
 
 android {
+    namespace 'com.petterp.floatingx.app'
+
     signingConfigs {
         config {
             storeFile file("key")
@@ -38,6 +41,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        buildConfig = true
+    }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -47,11 +53,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
     debugImplementation "com.bytedance.tools.codelocator:codelocator-core:2.0.3"
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-object-watcher-android-startup:2.10'
     implementation isDev ? project(path: ':floatingx_compose') : "io.github.petterpx:floatingx-compose:$version_name"
