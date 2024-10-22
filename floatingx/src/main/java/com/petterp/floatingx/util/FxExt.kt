@@ -67,7 +67,7 @@ internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = nu
     if (view == null) return
     if (view.parent == this) return
     (view.parent as? ViewGroup)?.also {
-        it.removeView(view)
+        it.safeRemoveView(view)
         it.endViewTransition(view)
     }
     try {
@@ -78,7 +78,7 @@ internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = nu
         }
     } catch (e: Exception) {
         Log.e("FxExt", "safeAddView: ${e.message}")
-        (view.parent as? ViewGroup)?.also { it.removeView(view) }
+        (view.parent as? ViewGroup)?.also { it.safeRemoveView(view) }
     }
 }
 
