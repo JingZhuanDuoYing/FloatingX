@@ -66,15 +66,18 @@ internal val Activity.contentView: FrameLayout?
 internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = null) {
     if (view == null) return
     if (view.parent == this) return
-    (view.parent as? ViewGroup)?.removeView(view)
-    try {
-        if (lp == null) {
-            addView(view)
-        } else {
-            addView(view, lp)
+    view.post {
+        (view.parent as? ViewGroup)?.also { it.removeView(view) }
+        try {
+            if (lp == null) {
+                addView(view)
+            } else {
+                addView(view, lp)
+            }
+        } catch (e: Exception) {
+            Log.e("FxExt", "safeAddView: ${e.message}")
+            (view.parent as? ViewGroup)?.also { it.removeView(view) }
         }
-    } catch (e: Exception) {
-        Log.e("FxExt", "safeAddView: ${e.message}")
     }
 }
 
