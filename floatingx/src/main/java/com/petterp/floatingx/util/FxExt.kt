@@ -3,6 +3,7 @@
 package com.petterp.floatingx.util
 
 import android.app.Activity
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -66,10 +67,14 @@ internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = nu
     if (view == null) return
     if (view.parent == this) return
     (view.parent as? ViewGroup)?.removeView(view)
-    if (lp == null) {
-        addView(view)
-    } else {
-        addView(view, lp)
+    try {
+        if (lp == null) {
+            addView(view)
+        } else {
+            addView(view, lp)
+        }
+    } catch (e: Exception) {
+        Log.e("FxExt", "safeAddView: ${e.message}")
     }
 }
 
