@@ -70,7 +70,7 @@ class FxAppPlatformProvider(
 
     override fun show() {
         val fxView = _internalView ?: return
-        if (!ViewCompat.isAttachedToWindow(fxView)) {
+        if (!fxView.isAttachedToWindow) {
             fxView.visibility = View.VISIBLE
             checkOrReInitGroupView()?.safeAddView(fxView)
         } else if (fxView.visibility != View.VISIBLE) {
@@ -95,7 +95,7 @@ class FxAppPlatformProvider(
         val fxView = _internalView ?: return false
         val decorView = activity.decorView ?: return false
         if (containerGroupView === decorView) return false
-        if (ViewCompat.isAttachedToWindow(fxView)) containerGroupView?.removeView(fxView)
+        if (fxView.isAttachedToWindow) containerGroupView?.removeView(fxView)
         _containerGroup = WeakReference(decorView)
         decorView.safeAddView(fxView)
         return true
@@ -118,7 +118,7 @@ class FxAppPlatformProvider(
     fun destroyToDetach(activity: Activity): Boolean {
         val fxView = _internalView ?: return false
         val oldContainer = containerGroupView ?: return false
-        if (!ViewCompat.isAttachedToWindow(fxView)) return false
+        if (!fxView.isAttachedToWindow) return false
         val nContainer = activity.decorView ?: return false
         if (nContainer !== oldContainer) return false
         oldContainer.removeView(_internalView)
