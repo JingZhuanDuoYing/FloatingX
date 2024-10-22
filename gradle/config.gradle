@@ -4,7 +4,7 @@ ext {
     targetsdk_version = 35
     compilesdk_version = 35
     version_code = gitVersionCode()
-    version_name = "1.0.2"
+    version_name = "1.0.3"
 }
 
 static def gitVersionTag() {
