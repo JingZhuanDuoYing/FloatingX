@@ -78,7 +78,7 @@ internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = nu
         }
     } catch (e: Exception) {
         Log.e("FxExt", "safeAddView: ${e.message}")
-        (view.parent as? ViewGroup)?.also { it.safeRemoveView(view) }
+        (view.parent as? ViewGroup)?.safeRemoveView(view)
     }
 }
 
