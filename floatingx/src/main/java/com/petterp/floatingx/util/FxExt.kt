@@ -82,6 +82,15 @@ internal fun ViewGroup.safeAddView(view: View?, lp: ViewGroup.LayoutParams? = nu
     }
 }
 
+
+internal fun ViewGroup.safeRemoveView(view: View?) {
+    if (view == null) return
+    if (!view.isAttachedToWindow) return
+    kotlin.runCatching {
+        removeView(view)
+    }
+}
+
 /**
  * 创建一个fx,自行初始化并控制插入位置
  *
